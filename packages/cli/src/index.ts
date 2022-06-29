@@ -25,12 +25,12 @@ program
 
 program
   .command("genkeys")
-  .description("Generate a new specified amount of MACI and ETH keypairs (QR Codes inclueded)")
+  .description("Generate a new specified amount of MACI and ETH keypairs (QR Codes and csvs included)")
   .argument("<amount>", "amount of MACI and ETH keypairs to be generated")
   .action((amount: number) => {
     genkeys(amount)
   })
-  .addHelpCommand(`ethpraguecli genkeys 3000`)
+  .addHelpCommand(`ethbarcelonacli genkeys 3000`)
 
 program
   .command("initialize")

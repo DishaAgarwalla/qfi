@@ -1,6 +1,6 @@
 {
-  "name": "@qfi/ethpraguecli",
-  "version": "1.5.0",
+  "name": "@qfi/ethbarcelonacli",
+  "version": "2.0.1",
   "description": "An easy-to-use CLI for supporting admin/operator activities for QFI",
   "main": "dist/cli/src/index.js",
   "repository": "https://github.com/quadratic-funding/qfi",
@@ -17,7 +17,7 @@
     "README.md"
   ],
   "bin": {
-    "ethpraguecli": "dist/cli/src/index.js"
+    "ethbarcelonacli": "dist/cli/src/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -79,5 +79,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "19e846e4d24c9bfa0329af14353597ef216dd39a"
+  "gitHead": "9c2b76e2fb41dbc7fb208e5b9bb2cf523a2304eb"
 }

@@ -27,6 +27,7 @@ import {
   FormHelperText,
   FormLabel,
   Input,
+  Box,
 } from "@chakra-ui/react";
 
 import { EaseInBottom, MagikButton } from "@qfi/ui";
@@ -479,17 +480,17 @@ export const Ballot = () => {
         },
       }}>
       <VStack spacing={0} w="full">
-        <Container h="full" w="full" maxWidth="container.sm">
+        <Container pt={10} h="full" w="full" maxWidth="container.md">
           <VStack mt={10} spacing={4} h="full" alignItems="flex-start">
             <Heading mb={4}>Your Ballot</Heading>
             <VStack spacing={2} alignItems={"flex-start"} w="full">
               <BallotExplainer />
               <EaseInBottom duration={0.3} delay={0.5} heightStart={20} heightEnd={10}>
-                <Text fontSize={"md"}>
+                <Text fontSize={"xs"}>
                   <b>Voice Credit balance: {voiceCreditBalance}</b>
                 </Text>
               </EaseInBottom>
-              <Text fontSize={"md"} pt={2} px={"1px"}>
+              <Text fontSize={"xs"} pt={2} px={"1px"}>
                 Voice Credits spent: {ballotOption1Votes ** 2} + {ballotOption2Votes ** 2} + {ballotOption3Votes ** 2} +
                 {ballotOption4Votes ** 2} + {ballotOption5Votes ** 2} + {ballotOption6Votes ** 2} +{" "}
                 {ballotOption7Votes ** 2} + {ballotOption8Votes ** 2} = {totalVoiceCredits}
@@ -510,18 +511,35 @@ export const Ballot = () => {
               </VStack>
             ) : (
               <VStack spacing={0} alignItems={"center"} w="full">
-                <Button
-                  as={Link}
-                  to="/projects"
-                  fontSize="lg"
-                  fontWeight={"black"}
-                  bg={"black"}
-                  color="white"
-                  h="60px"
-                  w="full"
-                  background="#5400FF">
-                  Checkout The Projects
-                </Button>
+               
+                <Box
+            sx={{
+           
+              boxSizing: "border-box",
+              color: "white",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "50%",
+              border: "0.8px solid rgb(53, 75, 55)",
+              transition: "all 0s linear",
+              _hover: { transform: "rotate(6.41deg)", scale: "1" },
+
+              transform: "rotate(-6.41deg)",
+              width:"322px",
+              height:"60px",
+            }}>
+         
+            <Button
+            width="322px"
+            height={"60px"}
+               as={Link}
+               variant="barcelona"
+               to="/projects"
+              fontSize={{ base: "lg", xl: "xl" }}
+              >
+              Checkout the Projects!
+            </Button>
+          </Box>
               </VStack>
             )}
 
@@ -533,14 +551,15 @@ export const Ballot = () => {
               justifyContent={{ base: "center", md: "space-between" }}
               w="full">
               <VStack spacing={2} alignItems={{ base: "center", md: "flex-start" }}>
-                <Heading fontSize={"md"} fontWeight={"bold"} alignSelf={"flex-start"}>
+                <Heading fontSize={"xs"} fontWeight={"bold"} alignSelf={"flex-start"}>
                   Ballot (MACI) Passphrase
                 </Heading>
-                <Text fontSize={"md"}>
+                <Text fontSize={"xs"}>
                   MACI (Minimal Anti-Collusion Infrastructure) uses zero knowledge proofs to protect against censorship
-                  and collusion in blockchain voting. Each voter gets a pseudo-random MACI key which is used to encrypt
-                  and validate your votes. This is the only way to vote in the round, and can be used to change your
-                  ballot at any time while the round is active, so keep it safe.
+                  and collusion in blockchain voting. (read more about MACI at this page). Each voter gets a
+                  pseudo-random MACI key which is used to encrypt and validate your votes. This is the only way to vote
+                  in the round, and can be used to change your ballot at any time while the round is active, so keep it
+                  safe (”not you MACI key, not your vote”)
                 </Text>
                 <VStack spacing={1} alignItems="flex-start" w="full">
                   <form style={{ width: "100%" }} onSubmit={handleSubmitMaciChange}>
@@ -558,16 +577,14 @@ export const Ballot = () => {
                             color={color}
                             variant={"solid"}
                             onClick={onClickSetOpenQRCodeReader}>
-                            <Text fontSize="md" fontWeight={"black"} fontFamily={"archivo"}>
+                            <Text fontSize="md" fontWeight={"black"}>
                               {" "}
                               Scan key QR Code{" "}
                             </Text>
                           </Button>
-                         
                         </VStack>
                         <VStack w="full" pt="10" justifyContent={"center"}>
                           <Button
-                            
                             fontSize="md"
                             fontWeight={"black"}
                             bg={"black"}
@@ -576,8 +593,7 @@ export const Ballot = () => {
                             w="full"
                             background="#5400FF"
                             type="submit"
-                            width="full"
-                            >
+                            width="full">
                             SAVE
                           </Button>
                         </VStack>
@@ -586,23 +602,23 @@ export const Ballot = () => {
                   </form>
                 </VStack>
                 {openQRCodeReader && (
-                      <Container h="full" w="full" maxWidth="container.sm">
-                        <QrReader
-                          scanDelay={1000}
-                          onResult={(result: any, error: any) => {
-                            if (!!result) {
-                              setMaciKey(result.text);
-                              setKey(result.text);
-                            }
+                  <Container h="full" w="full" maxWidth="container.sm">
+                    <QrReader
+                      scanDelay={1000}
+                      onResult={(result: any, error: any) => {
+                        if (!!result) {
+                          setMaciKey(result.text);
+                          setKey(result.text);
+                        }
 
-                            if (!!error) {
-                              console.info(`Something went wrong while reading the QR Code: ${error}`);
-                            }
-                          }}
-                          constraints={{ facingMode: "environment" }}
-                        />
-                      </Container>
-                    )}
+                        if (!!error) {
+                          console.info(`Something went wrong while reading the QR Code: ${error}`);
+                        }
+                      }}
+                      constraints={{ facingMode: "environment" }}
+                    />
+                  </Container>
+                )}
 
                 <Divider></Divider>
               </VStack>
@@ -616,7 +632,6 @@ export const Ballot = () => {
                     py={6}
                     fontSize={"lg"}
                     fontWeight="extrabold"
-                    fontFamily={"Helvetica"}
                     bg="blue"
                     color="white"
                     variant="solid"
@@ -627,19 +642,11 @@ export const Ballot = () => {
                 ) : (
                   <Center textAlign="center">
                     <VStack spacing={6} textAlign="center" w="full">
-                      <Text
-                        display={isConnected ? "none" : "flex"}
-                        fontSize={"sm"}
-                        fontWeight="extrabold"
-                        fontFamily={"Helvetica"}>
+                      <Text display={isConnected ? "none" : "flex"} fontSize={"xs"} fontWeight="extrabold">
                         Not Connected: Sign in to continue
                       </Text>
 
-                      <Text
-                        fontSize={"sm"}
-                        display={isValidMaciKey ? "none" : "flex"}
-                        fontWeight="extrabold"
-                        fontFamily={"Helvetica"}>
+                      <Text fontSize={"xs"} display={isValidMaciKey ? "none" : "flex"} fontWeight="extrabold">
                         Unregistered MACI Keypair: Enter a valid MACI passphrase to continue.
                       </Text>
                     </VStack>
